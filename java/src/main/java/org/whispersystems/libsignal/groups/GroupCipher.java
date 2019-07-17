@@ -137,7 +137,9 @@ public class GroupCipher {
         senderKeyStore.storeSenderKey(senderKeyId, record);
 
         return plaintext;
-      } catch (org.whispersystems.libsignal.InvalidKeyException | InvalidKeyIdException e) {
+      } catch (org.whispersystems.libsignal.InvalidKeyException e) {
+        throw new InvalidMessageException(e);
+      } catch (InvalidKeyIdException e) {
         throw new InvalidMessageException(e);
       }
     }
@@ -180,11 +182,17 @@ public class GroupCipher {
       cipher.init(Cipher.DECRYPT_MODE, new SecretKeySpec(key, "AES"), ivParameterSpec);
 
       return cipher.doFinal(ciphertext);
-    } catch (NoSuchAlgorithmException | NoSuchPaddingException | java.security.InvalidKeyException |
-             InvalidAlgorithmParameterException e)
-    {
+    } catch (NoSuchAlgorithmException e) {
       throw new AssertionError(e);
-    } catch (IllegalBlockSizeException | BadPaddingException e) {
+    } catch (NoSuchPaddingException e) {
+      throw new AssertionError(e);
+    } catch(java.security.InvalidKeyException e) {
+      throw new AssertionError(e);
+    } catch (InvalidAlgorithmParameterException e) {
+      throw new AssertionError(e);
+    } catch (IllegalBlockSizeException e) {
+      throw new InvalidMessageException(e);
+    } catch (BadPaddingException e) {
       throw new InvalidMessageException(e);
     }
   }
@@ -197,9 +205,17 @@ public class GroupCipher {
       cipher.init(Cipher.ENCRYPT_MODE, new SecretKeySpec(key, "AES"), ivParameterSpec);
 
       return cipher.doFinal(plaintext);
-    } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidAlgorithmParameterException |
-             IllegalBlockSizeException | BadPaddingException | java.security.InvalidKeyException e)
-    {
+    } catch (NoSuchAlgorithmException e) {
+      throw new AssertionError(e);
+    } catch (NoSuchPaddingException e) {
+      throw new AssertionError(e);
+    } catch (InvalidAlgorithmParameterException e) {
+      throw new AssertionError(e);
+    } catch (IllegalBlockSizeException e) {
+      throw new AssertionError(e);
+    } catch (BadPaddingException e) {
+      throw new AssertionError(e);
+    } catch (java.security.InvalidKeyException e) {
       throw new AssertionError(e);
     }
   }

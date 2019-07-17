@@ -17,7 +17,7 @@ import java.util.Map;
 
 public class InMemorySignedPreKeyStore implements SignedPreKeyStore {
 
-  private final Map<Integer, byte[]> store = new HashMap<>();
+  private final Map<Integer, byte[]> store = new HashMap<Integer, byte[]>();
 
   @Override
   public SignedPreKeyRecord loadSignedPreKey(int signedPreKeyId) throws InvalidKeyIdException {
@@ -35,7 +35,7 @@ public class InMemorySignedPreKeyStore implements SignedPreKeyStore {
   @Override
   public List<SignedPreKeyRecord> loadSignedPreKeys() {
     try {
-      List<SignedPreKeyRecord> results = new LinkedList<>();
+      List<SignedPreKeyRecord> results = new LinkedList<SignedPreKeyRecord>();
 
       for (byte[] serialized : store.values()) {
         results.add(new SignedPreKeyRecord(serialized));

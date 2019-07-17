@@ -26,7 +26,7 @@ public class SenderKeyRecord {
 
   private static final int MAX_STATES = 5;
 
-  private LinkedList<SenderKeyState> senderKeyStates = new LinkedList<>();
+  private LinkedList<SenderKeyState> senderKeyStates = new LinkedList<SenderKeyState>();
 
   public SenderKeyRecord() {}
 

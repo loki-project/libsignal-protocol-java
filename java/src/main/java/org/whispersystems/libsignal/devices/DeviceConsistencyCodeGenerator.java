@@ -18,7 +18,7 @@ public class DeviceConsistencyCodeGenerator {
                                    List<DeviceConsistencySignature> signatures)
   {
     try {
-      ArrayList<DeviceConsistencySignature> sortedSignatures = new ArrayList<>(signatures);
+      ArrayList<DeviceConsistencySignature> sortedSignatures = new ArrayList<DeviceConsistencySignature>(signatures);
       Collections.sort(sortedSignatures, new SignatureComparator());
 
       MessageDigest messageDigest = MessageDigest.getInstance("SHA-512");

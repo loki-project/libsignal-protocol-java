@@ -23,7 +23,7 @@ public class SessionRecord {
   private static final int ARCHIVED_STATES_MAX_LENGTH = 40;
 
   private SessionState             sessionState   = new SessionState();
-  private LinkedList<SessionState> previousStates = new LinkedList<>();
+  private LinkedList<SessionState> previousStates = new LinkedList<SessionState>();
   private boolean                  fresh          = false;
 
   public SessionRecord() {
@@ -108,7 +108,7 @@ public class SessionRecord {
    * @return a serialized version of the current SessionRecord.
    */
   public byte[] serialize() {
-    List<SessionStructure> previousStructures = new LinkedList<>();
+    List<SessionStructure> previousStructures = new LinkedList<SessionStructure>();
 
     for (SessionState previousState : previousStates) {
       previousStructures.add(previousState.getStructure());

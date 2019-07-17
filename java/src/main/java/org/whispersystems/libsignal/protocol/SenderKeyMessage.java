@@ -57,7 +57,9 @@ public class SenderKeyMessage implements CiphertextMessage {
       this.keyId          = senderKeyMessage.getId();
       this.iteration      = senderKeyMessage.getIteration();
       this.ciphertext     = senderKeyMessage.getCiphertext().toByteArray();
-    } catch (InvalidProtocolBufferException | ParseException e) {
+    } catch (InvalidProtocolBufferException e) {
+      throw new InvalidMessageException(e);
+    } catch (ParseException e) {
       throw new InvalidMessageException(e);
     }
   }

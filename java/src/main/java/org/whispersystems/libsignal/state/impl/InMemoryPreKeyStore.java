@@ -15,7 +15,7 @@ import java.util.Map;
 
 public class InMemoryPreKeyStore implements PreKeyStore {
 
-  private final Map<Integer, byte[]> store = new HashMap<>();
+  private final Map<Integer, byte[]> store = new HashMap<Integer, byte[]>();
 
   @Override
   public PreKeyRecord loadPreKey(int preKeyId) throws InvalidKeyIdException {

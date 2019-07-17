@@ -64,7 +64,11 @@ public class SignalMessage implements CiphertextMessage {
       this.counter          = whisperMessage.getCounter();
       this.previousCounter  = whisperMessage.getPreviousCounter();
       this.ciphertext       = whisperMessage.getCiphertext().toByteArray();
-    } catch (InvalidProtocolBufferException | InvalidKeyException | ParseException e) {
+    } catch (InvalidProtocolBufferException e) {
+      throw new InvalidMessageException(e);
+    } catch (InvalidKeyException e) {
+      throw new InvalidMessageException(e);
+    } catch (ParseException e) {
       throw new InvalidMessageException(e);
     }
   }
@@ -133,7 +137,9 @@ public class SignalMessage implements CiphertextMessage {
 
       byte[] fullMac = mac.doFinal(serialized);
       return ByteUtil.trim(fullMac, MAC_LENGTH);
-    } catch (NoSuchAlgorithmException | java.security.InvalidKeyException e) {
+    } catch (NoSuchAlgorithmException e) {
+      throw new AssertionError(e);
+    } catch (java.security.InvalidKeyException e) {
       throw new AssertionError(e);
     }
   }

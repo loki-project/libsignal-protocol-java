@@ -129,7 +129,7 @@ public class SenderKeyState {
   }
 
   public SenderMessageKey removeSenderMessageKey(int iteration) {
-    List<SenderKeyStateStructure.SenderMessageKey>     keys     = new LinkedList<>(senderKeyStateStructure.getSenderMessageKeysList());
+    List<SenderKeyStateStructure.SenderMessageKey>     keys     = new LinkedList<SenderKeyStateStructure.SenderMessageKey>(senderKeyStateStructure.getSenderMessageKeysList());
     Iterator<SenderKeyStateStructure.SenderMessageKey> iterator = keys.iterator();
 
     SenderKeyStateStructure.SenderMessageKey result = null;

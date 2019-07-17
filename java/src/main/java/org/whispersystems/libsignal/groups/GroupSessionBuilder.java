@@ -80,7 +80,9 @@ public class GroupSessionBuilder {
                                                 state.getSenderChainKey().getSeed(),
                                                 state.getSigningKeyPublic());
 
-      } catch (InvalidKeyIdException | InvalidKeyException e) {
+      } catch (InvalidKeyIdException e) {
+        throw new AssertionError(e);
+      } catch (InvalidKeyException e) {
         throw new AssertionError(e);
       }
     }

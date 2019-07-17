@@ -169,7 +169,7 @@ public class SessionState {
         ECPublicKey chainSenderRatchetKey = Curve.decodePoint(receiverChain.getSenderRatchetKey().toByteArray(), 0);
 
         if (chainSenderRatchetKey.equals(senderEphemeral)) {
-          return new Pair<>(receiverChain,index);
+          return new Pair<Chain, Integer>(receiverChain,index);
         }
       } catch (InvalidKeyException e) {
         Log.w("SessionRecordV2", e);
@@ -275,7 +275,7 @@ public class SessionState {
       return null;
     }
 
-    List<Chain.MessageKey>     messageKeyList     = new LinkedList<>(chain.getMessageKeysList());
+    List<Chain.MessageKey>     messageKeyList     = new LinkedList<Chain.MessageKey>(chain.getMessageKeysList());
     Iterator<Chain.MessageKey> messageKeyIterator = messageKeyList.iterator();
     MessageKeys                result             = null;
 

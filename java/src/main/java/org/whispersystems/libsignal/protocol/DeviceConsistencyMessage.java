@@ -30,7 +30,9 @@ public class DeviceConsistencyMessage {
                                                                   .setSignature(ByteString.copyFrom(signature.getSignature()))
                                                                   .build()
                                                                   .toByteArray();
-    } catch (InvalidKeyException | VrfSignatureVerificationFailedException e) {
+    } catch (InvalidKeyException e) {
+      throw new AssertionError(e);
+    } catch (VrfSignatureVerificationFailedException e) {
       throw new AssertionError(e);
     }
   }
@@ -43,7 +45,11 @@ public class DeviceConsistencyMessage {
       this.generation = message.getGeneration();
       this.signature  = new DeviceConsistencySignature(message.getSignature().toByteArray(), vrfOutputBytes);
       this.serialized = serialized;
-    } catch (InvalidProtocolBufferException | InvalidKeyException | VrfSignatureVerificationFailedException e) {
+    } catch (InvalidProtocolBufferException e) {
+      throw new InvalidMessageException(e);
+    } catch (InvalidKeyException e) {
+      throw new InvalidMessageException(e);
+    } catch (VrfSignatureVerificationFailedException e) {
       throw new InvalidMessageException(e);
     }
   }

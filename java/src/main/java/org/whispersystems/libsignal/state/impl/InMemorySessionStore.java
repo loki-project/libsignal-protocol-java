@@ -17,7 +17,7 @@ import java.util.Map;
 
 public class InMemorySessionStore implements SessionStore {
 
-  private Map<SignalProtocolAddress, byte[]> sessions = new HashMap<>();
+  private Map<SignalProtocolAddress, byte[]> sessions = new HashMap<SignalProtocolAddress, byte[]>();
 
   public InMemorySessionStore() {}
 
@@ -36,7 +36,7 @@ public class InMemorySessionStore implements SessionStore {
 
   @Override
   public synchronized List<Integer> getSubDeviceSessions(String name) {
-    List<Integer> deviceIds = new LinkedList<>();
+    List<Integer> deviceIds = new LinkedList<Integer>();
 
     for (SignalProtocolAddress key : sessions.keySet()) {
       if (key.getName().equals(name) &&

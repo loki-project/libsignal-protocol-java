@@ -38,6 +38,6 @@ public class RootKey {
     RootKey  newRootKey  = new RootKey(kdf, derivedSecrets.getRootKey());
     ChainKey newChainKey = new ChainKey(kdf, derivedSecrets.getChainKey(), 0);
 
-    return new Pair<>(newRootKey, newChainKey);
+    return new Pair<RootKey, ChainKey>(newRootKey, newChainKey);
   }
 }

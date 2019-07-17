@@ -110,7 +110,7 @@ public class NumericFingerprintGenerator implements FingerprintGenerator {
   }
 
   private byte[] getLogicalKeyBytes(List<IdentityKey> identityKeys) {
-    ArrayList<IdentityKey> sortedIdentityKeys = new ArrayList<>(identityKeys);
+    ArrayList<IdentityKey> sortedIdentityKeys = new ArrayList<IdentityKey>(identityKeys);
     Collections.sort(sortedIdentityKeys, new IdentityKeyComparator());
 
     ByteArrayOutputStream baos = new ByteArrayOutputStream();

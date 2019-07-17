@@ -15,7 +15,7 @@ import java.util.Map;
 
 public class InMemoryIdentityKeyStore implements IdentityKeyStore {
 
-  private final Map<SignalProtocolAddress, IdentityKey> trustedKeys = new HashMap<>();
+  private final Map<SignalProtocolAddress, IdentityKey> trustedKeys = new HashMap<SignalProtocolAddress, IdentityKey>();
 
   private final IdentityKeyPair identityKeyPair;
   private final int             localRegistrationId;

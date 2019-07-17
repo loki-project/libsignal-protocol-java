@@ -261,7 +261,7 @@ public class SessionCipher {
   {
     synchronized (SESSION_LOCK) {
       Iterator<SessionState> previousStates = sessionRecord.getPreviousSessionStates().iterator();
-      List<Exception>        exceptions     = new LinkedList<>();
+      List<Exception>        exceptions     = new LinkedList<Exception>();
 
       try {
         SessionState sessionState = new SessionState(sessionRecord.getSessionState());
@@ -396,7 +396,9 @@ public class SessionCipher {
     try {
       Cipher cipher = getCipher(Cipher.ENCRYPT_MODE, messageKeys.getCipherKey(), messageKeys.getIv());
       return cipher.doFinal(plaintext);
-    } catch (IllegalBlockSizeException | BadPaddingException e) {
+    } catch (IllegalBlockSizeException e) {
+      throw new AssertionError(e);
+    } catch (BadPaddingException e) {
       throw new AssertionError(e);
     }
   }
@@ -407,7 +409,9 @@ public class SessionCipher {
     try {
       Cipher cipher = getCipher(Cipher.DECRYPT_MODE, messageKeys.getCipherKey(), messageKeys.getIv());
       return cipher.doFinal(cipherText);
-    } catch (IllegalBlockSizeException | BadPaddingException e) {
+    } catch (IllegalBlockSizeException e) {
+      throw new InvalidMessageException(e);
+    } catch (BadPaddingException e) {
       throw new InvalidMessageException(e);
     }
   }
@@ -417,9 +421,13 @@ public class SessionCipher {
       Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
       cipher.init(mode, key, iv);
       return cipher;
-    } catch (NoSuchAlgorithmException | NoSuchPaddingException | java.security.InvalidKeyException |
-             InvalidAlgorithmParameterException e)
-    {
+    } catch (NoSuchAlgorithmException e) {
+      throw new AssertionError(e);
+    } catch (NoSuchPaddingException e) {
+      throw new AssertionError(e);
+    } catch (java.security.InvalidKeyException e) {
+      throw new AssertionError(e);
+    } catch (InvalidAlgorithmParameterException e) {
       throw new AssertionError(e);
     }
   }

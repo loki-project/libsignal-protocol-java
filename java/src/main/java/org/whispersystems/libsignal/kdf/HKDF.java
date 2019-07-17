@@ -40,7 +40,9 @@ public abstract class HKDF {
       Mac mac = Mac.getInstance("HmacSHA256");
       mac.init(new SecretKeySpec(salt, "HmacSHA256"));
       return mac.doFinal(inputKeyMaterial);
-    } catch (NoSuchAlgorithmException | InvalidKeyException e) {
+    } catch (NoSuchAlgorithmException e) {
+      throw new AssertionError(e);
+    } catch (InvalidKeyException e) {
       throw new AssertionError(e);
     }
   }
@@ -72,7 +74,9 @@ public abstract class HKDF {
       }
 
       return results.toByteArray();
-    } catch (NoSuchAlgorithmException | InvalidKeyException e) {
+    } catch (NoSuchAlgorithmException e) {
+      throw new AssertionError(e);
+    } catch (InvalidKeyException e) {
       throw new AssertionError(e);
     }
   }

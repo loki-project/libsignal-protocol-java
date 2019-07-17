@@ -57,7 +57,9 @@ public class ChainKey {
       mac.init(new SecretKeySpec(key, "HmacSHA256"));
 
       return mac.doFinal(seed);
-    } catch (NoSuchAlgorithmException | InvalidKeyException e) {
+    } catch (NoSuchAlgorithmException e) {
+      throw new AssertionError(e);
+    } catch (InvalidKeyException e) {
       throw new AssertionError(e);
     }
   }

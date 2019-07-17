@@ -81,7 +81,7 @@ public class KeyHelper {
    * @return the list of generated PreKeyRecords.
    */
   public static List<PreKeyRecord> generatePreKeys(int start, int count) {
-    List<PreKeyRecord> results = new LinkedList<>();
+    List<PreKeyRecord> results = new LinkedList<PreKeyRecord>();
 
     start--;
 

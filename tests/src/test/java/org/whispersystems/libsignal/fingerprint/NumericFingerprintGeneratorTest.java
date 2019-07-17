@@ -1,7 +1,5 @@
 package org.whispersystems.libsignal.fingerprint;
 
-import android.util.Log;
-
 import junit.framework.TestCase;
 
 import org.whispersystems.libsignal.IdentityKey;

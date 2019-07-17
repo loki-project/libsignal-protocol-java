@@ -19,7 +19,7 @@ public class DeviceConsistencyCommitment {
 
   public DeviceConsistencyCommitment(int generation, List<IdentityKey> identityKeys) {
     try {
-      ArrayList<IdentityKey> sortedIdentityKeys = new ArrayList<>(identityKeys);
+      ArrayList<IdentityKey> sortedIdentityKeys = new ArrayList<IdentityKey>(identityKeys);
       Collections.sort(sortedIdentityKeys, new IdentityKeyComparator());
 
       MessageDigest messageDigest = MessageDigest.getInstance("SHA-512");
