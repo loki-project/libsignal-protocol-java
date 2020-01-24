@@ -17,6 +17,9 @@ public interface CiphertextMessage {
   // This should be the worst case (worse than V2).  So not always accurate, but good enough for padding.
   public static final int ENCRYPTED_MESSAGE_OVERHEAD = 53;
 
+  // Loki
+  public static final int LOKI_FRIEND_REQUEST_TYPE   = 999;
+
   public byte[] serialize();
   public int getType();
 
