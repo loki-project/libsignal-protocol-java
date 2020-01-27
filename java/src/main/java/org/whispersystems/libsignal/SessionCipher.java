@@ -8,6 +8,7 @@ package org.whispersystems.libsignal;
 import org.whispersystems.libsignal.ecc.Curve;
 import org.whispersystems.libsignal.ecc.ECKeyPair;
 import org.whispersystems.libsignal.ecc.ECPublicKey;
+import org.whispersystems.libsignal.loki.FallbackSessionCipher;
 import org.whispersystems.libsignal.protocol.CiphertextMessage;
 import org.whispersystems.libsignal.protocol.PreKeySignalMessage;
 import org.whispersystems.libsignal.protocol.SignalMessage;
@@ -21,7 +22,6 @@ import org.whispersystems.libsignal.state.SessionRecord;
 import org.whispersystems.libsignal.state.SessionState;
 import org.whispersystems.libsignal.state.SessionStore;
 import org.whispersystems.libsignal.state.SignedPreKeyStore;
-import org.whispersystems.libsignal.util.ByteUtil;
 import org.whispersystems.libsignal.util.Pair;
 import org.whispersystems.libsignal.util.guava.Optional;
 
@@ -331,7 +331,8 @@ public class SessionCipher {
   public int getSessionVersion() {
     synchronized (SESSION_LOCK) {
       if (!sessionStore.containsSession(remoteAddress)) {
-        throw new IllegalStateException(String.format("No session for (%s)!", remoteAddress));
+        // If we have no session then we must be using the FallbackSessionCipherk
+        return FallbackSessionCipher.SESSION_VERSION;
       }
 
       SessionRecord record = sessionStore.loadSession(remoteAddress);

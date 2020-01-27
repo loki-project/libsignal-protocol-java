@@ -26,6 +26,9 @@ android {
             java.srcDirs = ['src/androidTest/java', project(':tests').file('src/test/java')]
         }
     }
+    defaultConfig {
+        minSdkVersion 9
+    }
 
     libraryVariants.all { variant ->
         variant.outputs.each { output ->
